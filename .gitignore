@@ -1,0 +1,15 @@
+# Variables de entorno y secretos
+.env
+.env.local
+.env.*.local
+
+# Dependencias instaladas por Composer
+/vendor/
+/composer.phar
+
+# Archivos locales y temporales
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
