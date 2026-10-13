@@ -144,11 +144,6 @@ include 'data/contenido.php';
         <h3 class="text-xl font-bold text-textil mb-3">Traductor</h3>
         <p class="text-cafe/85">Un módulo digital para traducir entre español y ódami y apoyar el aprendizaje.</p>
       </a>
-      <a href="acerca.php" class="section-card bg-white rounded-[2rem] p-6 shadow-suave hover:-translate-y-1 transition">
-        <div class="text-3xl mb-4">✨</div>
-        <h3 class="text-xl font-bold text-textil mb-3">Acerca</h3>
-        <p class="text-cafe/85">Objetivos, alcance del proyecto y visión de crecimiento del sitio cultural.</p>
-      </a>
     </div>
   </section>
 

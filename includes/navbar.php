@@ -122,7 +122,6 @@ $allianceItems = [
         </details>
 
         <?= directNavLink('traductor.php', 'Traductor', $currentPage); ?>
-        <?= directNavLink('acerca.php', 'Acerca', $currentPage); ?>
       </nav>
     </div>
 
@@ -171,7 +170,6 @@ $allianceItems = [
         </details>
 
         <?= directNavLink('traductor.php', 'Traductor', $currentPage, true); ?>
-        <?= directNavLink('acerca.php', 'Acerca', $currentPage, true); ?>
       </div>
     </nav>
   </div>

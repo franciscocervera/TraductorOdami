@@ -1,54 +1,16 @@
 <?php
 $title = 'Traductor | Ódami del Norte';
-$pageDescription = 'Traductor español ↔ ódami con una interfaz más visual, clara y preparada para integrarse con la API de OpenAI.';
+$pageDescription = 'Traduce palabras y frases entre español y ódami mediante un traductor de consulta lingüística y educativa.';
 include 'includes/config.php';
 include 'includes/header.php';
 include 'includes/navbar.php';
-include 'data/contenido.php';
 ?>
-<div class="pattern-strip"></div>
 <main>
-  <section class="bg-gradient-to-br from-textil via-terracota to-maiz text-white overflow-hidden">
-    <div class="hero-pattern">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 grid lg:grid-cols-2 gap-8 sm:gap-10 items-center">
-        <div>
-          <span class="inline-flex items-center gap-2 bg-white/15 rounded-full px-4 py-2 text-sm mb-5">🗣️ Herramienta de consulta lingüística</span>
-          <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6">Traductor español ↔ ódami</h1>
-          <p class="text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mb-8">
-            Un espacio digital para acercarse a la lengua ódami desde la consulta, el aprendizaje y la exploración cultural, con una experiencia clara, moderna y amigable.
-          </p>
-          <div class="flex flex-wrap gap-4">
-            <a href="#traductor-app" class="bg-white text-textil font-bold w-full sm:w-auto text-center px-6 py-3 rounded-full hover:scale-105 transition">Usar traductor</a>
-            <a href="#ejemplos" class="border border-white w-full sm:w-auto text-center px-6 py-3 rounded-full hover:bg-white hover:text-textil transition">Ver ejemplos</a>
-          </div>
-        </div>
-
-        <div class="grid gap-4 sm:gap-5">
-          <div class="bg-white/10 border border-white/15 rounded-[2rem] p-4 sm:p-6 shadow-suave backdrop-blur-sm">
-            <div class="aspect-[4/3] rounded-[1.5rem] overflow-hidden">
-              <img 
-                src="assets/img/traductor-hero.jpg" 
-                alt="Integrantes de la comunidad Ódami del norte participando en una celebración tradicional con música y danza ceremonial al aire libre."
-                class="w-full h-full object-cover"
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="traductor-app" class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
-    <article class="bg-white rounded-[2rem] shadow-suave p-5 sm:p-8 lg:p-10">
-      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-6 sm:mb-8">
-        <div>
-          <span class="inline-block bg-textil/10 text-textil rounded-full px-4 py-2 text-sm mb-3">Consulta interactiva</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-textil">Escribe, traduce y explora</h2>
-          <p class="text-cafe/75 mt-3 max-w-3xl">Consulta palabras, saludos o frases breves y explora una aproximación inicial entre español y ódami.</p>
-        </div>
-        <div class="text-sm text-cafe/70 bg-arena rounded-2xl px-4 py-3 lg:text-right">
-          Respuesta pensada para uso cultural y educativo.
-        </div>
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-9 pb-10 sm:pb-12">
+    <article class="bg-white rounded-[2rem] shadow-suave p-5 sm:p-7 lg:p-9">
+      <div class="mb-6 sm:mb-8">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-textil">Traductor español ↔ ódami</h1>
+        <p class="text-cafe/75 mt-3 max-w-3xl">Escribe una palabra o frase, selecciona el idioma de origen y consulta su traducción.</p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-5 sm:gap-6 mb-6">
@@ -97,7 +59,7 @@ include 'data/contenido.php';
     </article>
   </section>
 
-  <section id="ejemplos" class="max-w-7xl mx-auto px-4 sm:px-6 pb-10 sm:pb-16">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-10 sm:pb-16">
     <div class="mb-6 sm:mb-8">
       <span class="inline-block bg-sierra/10 text-sierra rounded-full px-4 py-2 text-sm mb-4">Explora con ejemplos</span>
       <h2 class="text-2xl sm:text-3xl font-extrabold text-textil mb-3">Frases de inicio</h2>

@@ -38,8 +38,7 @@ if (!isset($pageDescription)) {
             suave: '0 10px 30px rgba(91, 70, 54, 0.12)'
           },
           backgroundImage: {
-            'hero-odami': 'linear-gradient(135deg, rgba(166,61,64,0.95), rgba(201,106,61,0.92), rgba(217,164,65,0.88))',
-            'patron-odami': 'radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08) 0 2px, transparent 2px 100%), linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.05) 75%, transparent 75%, transparent)'
+            'hero-odami': 'linear-gradient(135deg, rgba(166,61,64,0.95), rgba(201,106,61,0.92), rgba(217,164,65,0.88))'
           }
         }
       }

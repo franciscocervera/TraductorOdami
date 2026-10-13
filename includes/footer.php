@@ -30,7 +30,6 @@
           <li><a class="hover:text-maiz transition" href="vt-distribuidores.php">VT Distribuidores Alimenticios</a></li>
           <li><a class="hover:text-maiz transition" href="bikiya-sopori.php">Bikiyá Sopory</a></li>
           <li><a class="hover:text-maiz transition" href="traductor.php">Traductor</a></li>
-          <li><a class="hover:text-maiz transition" href="acerca.php">Acerca</a></li>
         </ul>
       </div>
 
