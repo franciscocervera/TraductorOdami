@@ -10,17 +10,39 @@ include 'includes/navbar.php';
     <article class="bg-white rounded-[2rem] shadow-suave p-5 sm:p-7 lg:p-9">
       <div class="mb-6 sm:mb-8">
         <h1 class="text-3xl sm:text-4xl font-extrabold text-textil">Traductor español ↔ ódami</h1>
-        <p class="text-cafe/75 mt-3 max-w-3xl">Escribe una palabra o frase, selecciona el idioma de origen y consulta su traducción.</p>
+        <p class="text-cafe/75 mt-3 max-w-3xl">Escribe una palabra o frase, o utiliza el micrófono para dictar en español antes de traducir.</p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-5 sm:gap-6 mb-6">
         <div>
           <label for="inputText" class="block font-semibold mb-2 text-cafe">Texto de entrada</label>
-          <textarea
-            id="inputText"
-            class="w-full border border-cafe/15 rounded-[1.5rem] p-4 h-52 sm:h-60 focus:outline-none focus:ring-2 focus:ring-textil/40 focus:border-textil resize-none"
-            placeholder="Escribe aquí la palabra, frase o idea que quieres traducir..."
-          ></textarea>
+          <div class="relative">
+            <textarea
+              id="inputText"
+              class="dictation-input w-full border border-cafe/15 rounded-[1.5rem] p-4 h-52 sm:h-60 focus:outline-none focus:ring-2 focus:ring-textil/40 focus:border-textil resize-none"
+              placeholder="Escribe aquí la palabra, frase o idea que quieres traducir..."
+            ></textarea>
+            <button
+              id="dictationBtn"
+              type="button"
+              class="dictation-button"
+              aria-label="Iniciar dictado en español"
+              aria-pressed="false"
+              title="Dictar en español"
+              hidden
+            >
+              <svg class="dictation-icon-mic" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="2" width="6" height="12" rx="3"></rect>
+                <path d="M5 10a7 7 0 0 0 14 0M12 17v5m-4 0h8"></path>
+              </svg>
+              <svg class="dictation-icon-stop" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <rect x="5" y="5" width="14" height="14" rx="3"></rect>
+              </svg>
+            </button>
+          </div>
+          <p id="dictationStatus" class="dictation-status text-sm text-cafe/75" role="status" aria-live="polite">
+            Presiona el micrófono para dictar en español.
+          </p>
         </div>
 
         <div>
