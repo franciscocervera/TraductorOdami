@@ -19,6 +19,7 @@ include 'includes/navbar.php';
           <div class="relative">
             <textarea
               id="inputText"
+              maxlength="1800"
               class="dictation-input w-full border border-cafe/15 rounded-[1.5rem] p-4 h-52 sm:h-60 focus:outline-none focus:ring-2 focus:ring-textil/40 focus:border-textil resize-none"
               placeholder="Escribe aquí la palabra, frase o idea que quieres traducir..."
             ></textarea>

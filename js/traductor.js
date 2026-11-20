@@ -13,12 +13,31 @@ const WAIT_FOR_SPEECH_MS = 12000;
 const SILENCE_MS = 3500;
 let activeSession = null;
 
+const MAX_TRANSLATION_CHARS = 1800;
+let activeTranslationController = null;
+
+function updateTranslateAvailability() {
+  const disabled = Boolean(activeSession || activeTranslationController);
+  translateBtn.disabled = disabled;
+  translateBtn.classList.toggle('opacity-60', disabled);
+  translateBtn.classList.toggle('cursor-not-allowed', disabled);
+}
+
+function cancelPendingTranslation() {
+  if (activeTranslationController) {
+    activeTranslationController.abort();
+    activeTranslationController = null;
+  }
+  updateTranslateAvailability();
+}
+
 async function translateText() {
   if (activeSession) {
     statusMessage.textContent = 'Detén el dictado antes de traducir.';
     return;
   }
 
+  cancelPendingTranslation();
   const text = inputText.value.trim();
   const selectedDirection = direction.value;
 
@@ -27,33 +46,48 @@ async function translateText() {
     statusMessage.textContent = 'Escribe un texto para traducir.';
     return;
   }
+  if (Array.from(text).length > MAX_TRANSLATION_CHARS) {
+    outputText.value = '';
+    statusMessage.textContent = `El texto supera el máximo de ${MAX_TRANSLATION_CHARS} caracteres.`;
+    return;
+  }
 
-  outputText.value = 'Traduciendo...';
-  statusMessage.textContent = 'Consultando la API...';
+  const controller = new AbortController();
+  activeTranslationController = controller;
+  updateTranslateAvailability();
+  outputText.value = '';
+  statusMessage.textContent = 'Traduciendo...';
 
   try {
     const response = await fetch('api/traducir.php', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        text,
-        direction: selectedDirection
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, direction: selectedDirection }),
+      signal: controller.signal
     });
 
     const data = await response.json();
-
     if (!response.ok) {
-      throw new Error(data.translation || 'No se pudo completar la traducción.');
+      throw new Error(typeof data.error === 'string' ? data.error : 'No se pudo completar la traducción.');
+    }
+    if (typeof data.translation !== 'string' || !data.translation.trim()) {
+      throw new Error('El servicio devolvió una traducción no válida.');
     }
 
-    outputText.value = data.translation || '';
+    if (activeTranslationController !== controller) return;
+    outputText.value = data.translation;
     statusMessage.textContent = 'Traducción completada.';
   } catch (error) {
+    if (activeTranslationController !== controller || error.name === 'AbortError') return;
     outputText.value = '';
-    statusMessage.textContent = error.message || 'Ocurrió un error al traducir.';
+    statusMessage.textContent = error instanceof SyntaxError
+      ? 'El servidor devolvió una respuesta no válida.'
+      : error.message || 'Ocurrió un error al traducir.';
+  } finally {
+    if (activeTranslationController === controller) {
+      activeTranslationController = null;
+      updateTranslateAvailability();
+    }
   }
 }
 
@@ -69,9 +103,7 @@ function setDictationAppearance(listening) {
   dictationBtn.setAttribute('aria-label', listening ? 'Detener dictado en español' : 'Iniciar dictado en español');
   dictationBtn.title = listening ? 'Detener dictado' : 'Dictar en español';
   dictationBtn.disabled = false;
-  translateBtn.disabled = listening;
-  translateBtn.classList.toggle('opacity-60', listening);
-  translateBtn.classList.toggle('cursor-not-allowed', listening);
+  updateTranslateAvailability();
 }
 
 function dictationErrorMessage(error) {
@@ -143,6 +175,8 @@ function startDictation() {
     return;
   }
 
+  cancelPendingTranslation();
+  outputText.value = '';
   const recognition = new SpeechRecognitionClass();
   recognition.lang = 'es-MX';
   recognition.continuous = false;
@@ -240,17 +274,29 @@ dictationBtn.addEventListener('click', () => {
 
 inputText.addEventListener('input', () => {
   if (activeSession) stopDictation('edited', true);
+  cancelPendingTranslation();
+  outputText.value = '';
+  statusMessage.textContent = 'Presiona Traducir para obtener el resultado.';
 });
 
-direction.addEventListener('change', updateDictationAvailability);
+direction.addEventListener('change', () => {
+  cancelPendingTranslation();
+  outputText.value = '';
+  statusMessage.textContent = 'Selecciona Traducir para consultar la nueva dirección.';
+  updateDictationAvailability();
+});
 
 swapBtn.addEventListener('click', () => {
+  cancelPendingTranslation();
+  outputText.value = '';
+  statusMessage.textContent = 'Selecciona Traducir para consultar la nueva dirección.';
   direction.value = direction.value === 'es-odami' ? 'odami-es' : 'es-odami';
   updateDictationAvailability();
 });
 
 document.querySelectorAll('.example-btn').forEach((button) => {
   button.addEventListener('click', () => {
+    cancelPendingTranslation();
     if (activeSession) stopDictation('example', true);
     inputText.value = button.dataset.text || '';
     direction.value = button.dataset.direction || 'es-odami';
